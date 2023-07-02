@@ -1,0 +1,12 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD","curl", "--fail", "http://localhost:80", "||" ,"curl", "-s", "-X", "POST", "https://api.telegram.org/bot6060797370:AAF2qE_d8b9yheQZeIO7z3IWxZ5DDxgxk9s/sendMessage", "-d", "chat_id=5325949125&text=Container health check failed!"]
+      interval: 60s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
